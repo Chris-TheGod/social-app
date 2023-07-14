@@ -3,6 +3,12 @@ import { Button } from './Button'
 import { ProfileImage } from './ProfileImage'
 import { useState } from 'react'
 
+const updateTextAreaSize = (textArea?: HTMLTextAreaElement) => {
+  if (textArea == null) return
+  textArea.style.height = '0'
+  textArea.style.height = `${textArea.scrollHeight}px`
+}
+
 export const NewTweetForm = () => {
   const session = useSession()
   const [inputValue, setInputValue] = useState('')
@@ -14,7 +20,7 @@ export const NewTweetForm = () => {
       <div className='flex gap-4'>
         <ProfileImage src={session.data.user.image} />
         <textarea
-          style={{ height: 50 }}
+          style={{ height: 0 }}
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           className='flex-grow resize-none overflow-hidden p-4 text-lg outline-none'
